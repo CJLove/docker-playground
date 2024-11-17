@@ -1,0 +1,32 @@
+# version: "3"
+
+networks:
+
+  nodeNet:
+    name: nodeNet
+    driver: macvlan
+    driver_opts:
+      parent: br0
+    ipam:
+      config:
+        - subnet: "192.168.1.0/24"
+
+  bridgeNet:
+    name: bridgeNet
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "172.200.200.0/24"
+
+
+services:
+  container1:
+    image: fir.love.io:3005/nettools:latest
+    container_name: container1
+    cap_add:
+      - NET_ADMIN
+    networks:
+      nodeNet:
+        ipv4_address: 192.168.1.201
+      bridgeNet:
+
