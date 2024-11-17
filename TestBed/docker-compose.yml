@@ -1,4 +1,4 @@
-version: "3"
+# version: "3"
 
 networks:
 
@@ -12,6 +12,14 @@ networks:
         - subnet: "192.168.1.0/24"
           gateway: "192.168.1.1"
 
+  bridgeNet:
+    name: bridgeNet
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "172.20.20.0/24"
+
+
 services:
   container1:
     image: fir.love.io:3005/nettools:latest
@@ -19,6 +27,7 @@ services:
     networks:
       nodeNet:
         ipv4_address: 192.168.1.200
+      bridgeNet:
 
   container2:
     image: fir.love.io:3005/nettools:latest
@@ -26,3 +35,12 @@ services:
     networks:
       nodeNet:
         ipv4_address: 192.168.1.201
+      bridgeNet:
+
+  container3:
+    image: fir.love.io:3005/nettools:latest
+    container_name: container3
+    networks:
+      nodeNet:
+        ipv4_address: 192.168.1.202
+      bridgeNet:
