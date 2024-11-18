@@ -15,7 +15,7 @@ networks:
     name: test2-net
     driver: macvlan
     driver_opts:
-      parent: test-net
+      parent: test2-net
     ipam:
       config:
         - subnet: "10.30.30.0/24"
@@ -37,6 +37,8 @@ services:
     networks:
       test-net:
         ipv4_address: 10.20.20.30
+      test2-net:
+        ipv4_address: 10.30.30.30
       c-vm-net:
         ipv4_address: 11.0.1.3
 
