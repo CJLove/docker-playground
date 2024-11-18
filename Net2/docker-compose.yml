@@ -1,0 +1,42 @@
+# version: "3"
+
+networks:
+
+  test-net:
+    name: test-net
+    driver: macvlan
+    driver_opts:
+      parent: test-net
+    ipam:
+      config:
+        - subnet: "10.20.20.0/24"
+
+  test2-net:
+    name: test2-net
+    driver: macvlan
+    driver_opts:
+      parent: test-net
+    ipam:
+      config:
+        - subnet: "10.30.30.0/24"
+
+  c-vm-net:
+    name: vm-net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "11.0.1.0/24"
+
+
+services:
+  container1:
+    image: fir.love.io:3005/nettools:latest
+    container_name: container1
+    cap_add:
+      - NET_ADMIN
+    networks:
+      test-net:
+        ipv4_address: 10.20.20.30
+      c-vm-net:
+        ipv4_address: 11.0.1.3
+

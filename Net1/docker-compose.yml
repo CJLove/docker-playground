@@ -2,21 +2,21 @@
 
 networks:
 
-  nodeNet:
-    name: nodeNet
+  test-net:
+    name: test-net
     driver: macvlan
     driver_opts:
-      parent: br0
+      parent: test-net
     ipam:
       config:
-        - subnet: "192.168.1.0/24"
+        - subnet: "10.20.20.0/24"
 
-  bridgeNet:
-    name: bridgeNet
+  b-vm-net:
+    name: b-vm-net
     driver: bridge
     ipam:
       config:
-        - subnet: "172.200.200.0/24"
+        - subnet: "11.0.1.0/24"
 
 
 services:
@@ -26,7 +26,7 @@ services:
     cap_add:
       - NET_ADMIN
     networks:
-      nodeNet:
-        ipv4_address: 192.168.1.201
-      bridgeNet:
-
+      test-net:
+        ipv4_address: 192.168.1.20
+      b-vm-net:
+        ipv4_address: 11.0.1.2
