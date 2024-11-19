@@ -44,7 +44,7 @@ services:
 
   container2:
     image: fir.love.io:3005/nettools:latest
-    container_name: container1
+    container_name: container2
     cap_add:
       - NET_ADMIN
     networks:
