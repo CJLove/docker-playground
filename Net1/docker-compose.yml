@@ -6,14 +6,16 @@ networks:
     name: test-net
     driver: macvlan
     driver_opts:
-      parent: test-net
+      parent: enp1s0
     ipam:
       config:
         - subnet: "10.20.20.0/24"
 
   b-vm-net:
     name: b-vm-net
-    driver: bridge
+    driver: macvlan
+    driver_opts:
+      parent: b-vm-net
     ipam:
       config:
         - subnet: "11.0.1.0/24"
